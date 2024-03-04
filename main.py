@@ -8,6 +8,9 @@ class UserInfo:
         self.daily_calories_intake = self.get_calories("Enter your daily calorie intake: ")
         self.water_intake = int(input("Enter your daily water intake (in liters): "))
         self.weight_goal = float(input("Enter your weight goal (in kg): "))
+        self.bmi = self.calculate_bmi()
+        self.body_fat_percentage = self.body_fat()
+        self.physique = self.physique_rating()
 
     def get_name(self):
         while True:
@@ -68,6 +71,37 @@ class UserInfo:
                     print("Invalid input. Please enter a positive integer.")
             except ValueError:
                 print("Invalid input. Please enter a valid integer.")
+                
+    def calculate_bmi(self):
+        return self.weight / self.height**2
+
+    def body_fat(self):
+        bmi = self.calculate_bmi()
+        if 18 < self.age < 100:
+            if self.gender == 'male': 
+                return float(1.20 * bmi + 0.23 * self.age - 16.2)  # Body fat percentage for male adults
+            else: 
+                return 1.20 * bmi + 0.23 * self.age - 5.4   # Body fat percentage for female adults
+        elif 7 < self.age < 17:
+            if self.gender == 'male':
+                return 1.51 * bmi + 0.70 * self.age - 2.2   # Body fat percentage for boys
+            else:
+                return 1.51 * bmi + 0.70 * self.age - 1.4   # Body fat percentage for girls
+
+    def physique_rating(self):
+        bmi = self.bmi
+        body_fat_percentage = self.body_fat_percentage
+
+        if 16 <= bmi < 18.5 and body_fat_percentage < 10:
+            return "Skinny Fat"
+        elif 18.5 <= bmi < 25 and 8 <= body_fat_percentage < 20:
+            return "Fit"
+        elif 25 <= bmi < 30 and 18 <= body_fat_percentage < 25:
+            return "Overweight"
+        elif bmi >= 30 and body_fat_percentage >= 25:
+            return "Obese"
+        else:
+            return "Normal"
 
     def display_info(self):
         print("\nUser Information:")
@@ -79,6 +113,10 @@ class UserInfo:
         print(f"Daily Calorie Intake: {self.daily_calories_intake} calories")
         print(f"Daily Water Intake: {self.water_intake} liters")
         print(f"Weight Goal: {self.weight_goal} kg")
+        print(f"Body Mass Index (BMI): {self.bmi}")
+        print(f"Body Fat Percentage: {self.body_fat_percentage} %")
+        print(f"Body Physique: {self.physique}")
+
 
 user_info = UserInfo()
 
