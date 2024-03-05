@@ -11,6 +11,9 @@ class UserInfo:
         self.bmi = self.calculate_bmi()
         self.body_fat_percentage = self.body_fat()
         self.physique = self.physique_rating()
+        self.BMR=self.calcBMR()
+        self.TBW=self.calcTBW()
+        self.ideal_weight=self.calc_ideal()
 
     def get_name(self):
         while True:
@@ -102,7 +105,41 @@ class UserInfo:
             return "Obese"
         else:
             return "Normal"
+        
 
+    def calcTBW(self):                                         # height in cm, weight in kg
+     if self.age<18 : 
+        if self.gender=="male" and self.height<132.7:
+            Total_body_water= -1.927 + 0.465 * self.weight + 0.045 * self.height
+        elif self.gender=="male" and self.height>=132.7:
+            Total_body_water=-21.993 + 0.406 * self.weight + 0.209 * self.height
+        elif self.gender=="female" and self.height<110.8:  
+            Total_body_water=0.076 + 0.507 * self.weight + 0.013 * self.height
+        elif self.gender=="female" and self.height>=110.8:
+            Total_body_water=-10.313 + 0.252 * self.weight + 0.154 * self.height
+     if self.age>=18:
+        if self.gender=="male":
+             Total_body_water= 2.447 - (0.09145 * self.age) + (0.1074 * self.height) + (0.3362 * self.weight) 
+             
+        elif self.gender=="female":
+            Total_body_water= -2.097 + (0.1069 * self.height) + (0.2466 * self.weight)
+     return Total_body_water
+    
+
+    def calcBMR(self):                                        # height in cm, weight in kg
+        if self.gender=="male":
+            BMR = 88.362 + (13.397 * self.weight ) + (4.799 * self.height ) - (5.677 * self.age )
+        elif self.gender=="female":
+            BMR = 447.593 + (9.247 * self.weight ) + (3.098 * self.height ) - (4.330 * self.age )
+        return BMR
+    
+    def calc_ideal(self):
+         if self.gender=="male":
+            ideal_weight = 50 + (0.91 * (self.height - 152.4))
+         elif self.gender=="female":
+            ideal_weight = 45.5 + (0.91 * (self.height - 152.4))
+         return ideal_weight
+        
     def display_info(self):
         print("\nUser Information:")
         print(f"Name: {self.name}")
@@ -113,9 +150,12 @@ class UserInfo:
         print(f"Daily Calorie Intake: {self.daily_calories_intake} calories")
         print(f"Daily Water Intake: {self.water_intake} liters")
         print(f"Weight Goal: {self.weight_goal} kg")
+        print(f"Total Body Water: {round(self.TBW,2)} litres")
+        print(f"Basal Metabolic Rate (BMR): {round(self.BMR,2)} calories/day")
         print(f"Body Mass Index (BMI): {self.bmi}")
         print(f"Body Fat Percentage: {self.body_fat_percentage} %")
         print(f"Body Physique: {self.physique}")
+        print(f"Ideal Weight: {round(self.ideal_weight,2)} kg")
 
 
 user_info = UserInfo()
