@@ -6,7 +6,7 @@ class UserInfo:
         self.weight = self.get_weight()
         self.height = self.get_height()
         self.daily_calories_intake = self.get_calories("Enter your daily calorie intake: ")
-        self.water_intake = int(input("Enter your daily water intake (in liters): "))
+        self.water_intake = float(input("Enter your daily water intake (in liters): "))
         self.weight_goal = float(input("Enter your weight goal (in kg): "))
         self.bmi = self.calculate_bmi()
         self.body_fat_percentage = self.body_fat()
