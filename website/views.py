@@ -55,4 +55,13 @@ def home():
 @Data.route('/subscribtion', methods=['GET', 'POST'])
 def price_page():
    return render_template("subscribtion.html")
+
+
+@Data.route('/captcha', methods=['GET', 'POST'])
+def captcha_page():
+   return render_template("captcha.html")
+   
+@Data.route('/food', methods=['GET', 'POST'])
+def food_page():
+   return render_template("food.html")
    

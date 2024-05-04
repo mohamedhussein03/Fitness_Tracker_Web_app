@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify You're Not a Robot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333; /* Dark text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff; /* White background for card */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #1e90ff; /* Blue button color */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #007bff; /* Darker blue on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Verify You're Not a Robot</h1>
+        <p>Complete the CAPTCHA challenge to prove you're a human.</p>
+        <img src="https://qph.cf2.quoracdn.net/main-qimg-0025b2b485965ef8cb19e933bcc367e1"
+            alt="CAPTCHA Image">
+        <form id="captchaForm" onsubmit="return validateCaptcha()">
+            <label for="captcha">Enter the text you see</label>
+            <input type="text" id="captcha" name="captchaText" placeholder="Type the text" required>
+            <button type="submit">Verify</button>
+        </form>
+    </div>
+
+    <script>
+        function validateCaptcha() {
+            var userInput = document.getElementById("captcha").value.trim();
+            if (userInput.toUpperCase() === "W68HP") {
+                // Redirect to sign-up page if CAPTCHA is correct
+                window.location.href = "/sign-up";
+                return false; // Prevent form submission
+            } else {
+                alert("Invalid CAPTCHA text. Please try again.");
+                return false; // Prevent form submission
+            }
+        }
+    </script>
+</body>
+
+</html>

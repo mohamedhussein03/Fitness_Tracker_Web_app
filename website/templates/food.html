@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional Custom Styles */
+        /* Override Tailwind utility classes or add custom styles here */
+
+        /* Example of custom button hover state */
+        .hover\:bg-accent:hover {
+            background-color: #ed64a6; /* Replace with your desired hover color */
+        }
+
+        /* Custom CSS for navbar */
+        .header {
+            background-color: #001aff; /* Blue background color */
+            color: #ebecee; /* Light text color */
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Custom CSS for navbar links */
+        .header a {
+            color: #ebecee; /* Light text color for links */
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 15px; /* Add spacing between links */
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Custom CSS for navbar brand */
+        .header-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-brand svg {
+            stroke: #ebecee; /* Light stroke color for SVG icon */
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        .header-brand span {
+            font-size: 20px;
+        }
+
+        /* Custom CSS for navbar links container */
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links .nav-item {
+            margin-right: 15px; /* Add spacing between navbar items */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <header class="header">
+        <div class="header-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+            </svg>
+            <span>Track Pal</span>
+        </div>
+        <nav class="nav-links">
+            {% if user and user.is_authenticated %}
+                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                <a class="nav-item nav-link" href="/">Home</a>
+            {% else %}
+                <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+            {% endif %}
+            <a class="nav-item nav-link" id="subscribtion" href="/subscribtion">Subscription</a>
+        </nav>
+    </header>
+
+    <main class="bg-white py-8 px-6">
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Add Food</h2>
+            <div class="flex items-center gap-4">
+                <select id="foodSelect"
+                    class="flex h-10 items-center justify-between rounded-md border border-input bg-background
+                    px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none
+                    focus:ring-2 focus:ring-ring focus:ring-offset-2 w-full">
+                    <option value="" disabled selected>Select food</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Chicken">Chicken</option>
+                    <option value="Broccoli">Broccoli</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Eggs">Eggs</option>
+                </select>
+                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm
+                    font-medium ring-offset-background transition-colors focus:outline-none focus:ring-2
+                    focus:ring-ring focus:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+                    onclick="addFood()">
+                    Add
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Food Log</h2>
+            <div id="foodLogContainer" class="grid gap-4">
+                <!-- Food log entries will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function addFood() {
+            const foodSelect = document.getElementById('foodSelect');
+            const selectedFood = foodSelect.value;
+
+            if (selectedFood) {
+                // Create food log entry HTML
+                const foodLogEntry = document.createElement('div');
+                foodLogEntry.className = 'bg-blue-50 rounded-lg p-4 flex items-center justify-between';
+
+                const foodName = document.createElement('span');
+                foodName.className = 'font-medium';
+                foodName.textContent = selectedFood;
+
+                const removeButton = document.createElement('button');
+                removeButton.className = 'inline-flex items-center justify-center rounded-full p-1 bg-red-500 text-white';
+                removeButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+                removeButton.onclick = function() {
+                    foodLogEntry.remove();
+                };
+
+                foodLogEntry.appendChild(foodName);
+                foodLogEntry.appendChild(removeButton);
+
+                // Append food log entry to container
+                const foodLogContainer = document.getElementById('foodLogContainer');
+                foodLogContainer.appendChild(foodLogEntry);
+
+                // Clear selection after adding food
+                foodSelect.selectedIndex = 0;
+            }
+        }
+    </script>
+</body>
+
+</html>
