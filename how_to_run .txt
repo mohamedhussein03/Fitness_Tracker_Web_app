@@ -1,0 +1,28 @@
+In VS Code, go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window.
+1.Search for "Python" in the Extensions Marketplace.
+•	Click "Install" on the Python and Pylance extension
+
+2.Search for "Flask" in the Extensions Marketplace.
+•	Click "Install" on the Flask-snippets extension
+
+3.Search for "SQL" in the Extensions Marketplace.
+•	Click "Install" on the (SQL Bindings, SQLite, SQLTools)
+
+4.Search for "HTML" in the Extensions Marketplace.
+•	Click "Install" on the HTML CSS Support 
+
+5.Search for "Live Server" in the Extensions Marketplace.
+•	Click "Install" on the Live Server Extension 
+
+6. Open the VS Code terminal and paste the next commands one by one.
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+pip install flask
+pip install sqlalchemy
+
+These commands will install Flask for building web applications and SQLAlchemy for database integration. Now you are set and ready to run the code on your device.
+
+
+TO RUN THE CODE
+
+choose the “main.py” file and press the run button on the top right 
+Copy the link generated and paste it in any web-browser and enjoy :)

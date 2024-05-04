@@ -34,12 +34,12 @@ def home():
             user_found.calorie_intake=calorie_intake
             user_found.water_intake=water_intake
             user_found.weight_goal=weight_goal
-            if int(height)<0 :flash('Height must be greater than 0', category='error')
-            elif int(weight)<0 :flash('Weight must be greater than 0', category='error')
-            elif int(age)<0 :flash('Age must be greater than 0', category='error')
-            elif int(calorie_intake)<0 :flash('Calorie intake must be greater than 0', category='error')
-            elif int(water_intake)<0 :flash('Water intake must be greater than 0', category='error')
-            elif int(weight_goal)<0 :flash('Weight goal must be greater than 0', category='error')
+            if int(height)<=0 :flash('Height must be greater than 0', category='error')
+            elif int(weight)<=0 :flash('Weight must be greater than 0', category='error')
+            elif int(age)<=0 :flash('Age must be greater than 0', category='error')
+            elif int(calorie_intake)<=0 :flash('Calorie intake must be greater than 0', category='error')
+            elif int(water_intake)<=0 :flash('Water intake must be greater than 0', category='error')
+            elif int(weight_goal)<=0 :flash('Weight goal must be greater than 0', category='error')
             else:
              db.session.commit() 
              return redirect(url_for('Calculations.home'))
