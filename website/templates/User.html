@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculated Metrics</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <head>
+        <style>
+            /* Custom CSS for navbar */
+            .header {
+                background-color: #001aff; /* Blue background color */
+                color: #ebecee; /* Light text color */
+                font-size: 18px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+                height: 60px;
+            }
+    
+            /* Custom CSS for navbar links */
+            .header a {
+                color: #ebecee; /* Light text color for links */
+                text-decoration: none;
+                font-weight: bold;
+                margin-right: 15px; /* Add spacing between links */
+            }
+    
+            .header a:hover {
+                text-decoration: underline;
+            }
+    
+            /* Custom CSS for navbar brand */
+            .header-brand {
+                display: flex;
+                align-items: center;
+            }
+    
+            .header-brand svg {
+                stroke: #ebecee; /* Light stroke color for SVG icon */
+                width: 24px;
+                height: 24px;
+                margin-right: 8px;
+            }
+    
+            .header-brand span {
+                font-size: 20px;
+            }
+    
+            /* Custom CSS for navbar links container */
+            .nav-links {
+                display: flex;
+                align-items: center;
+            }
+    
+            .nav-links .nav-item {
+                margin-right: 15px; /* Add spacing between navbar items */
+            }
+        </style>
+    </head>
+    
+    <body>
+        <header class="header">
+            <div class="header-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+                </svg>
+                <span>Track Pal</span>
+            </div>
+            <nav class="nav-links">
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                    <a class="nav-item nav-link" href="/">Home</a>
+                {% else %}
+                    <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                    <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+                {% endif %}
+                <a class="nav-item nav-link" id="subscribtion" href="/subscribtion">Subscription</a>
+
+            </nav>
+        </header>
+    
+
+    <section class="w-full py-12 md:py-24 lg:py-32 p 100px ">
+        <div class="container mx-auto max-w-9xl px-4 md:px-6">
+            <div class="rounded-lg border bg-white text-gray-800 shadow-lg">
+                <div class="bg-blue-500 text-white rounded-t-lg p-6">
+                    <h3 class="text-2xl font-bold text-center">Calculated Metrics</h3>
+                </div>
+                <div class="p-6">
+                    <div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <h4 class="text-lg font-medium">BMI</h4>
+                                <div id="bmi" class="output-box block w-full h-10 px-3 py-2 border rounded-md bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    {{bmi}}<!-- Output BMI value here -->
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="text-lg font-medium">BMR</h4>
+                                <div id="bmr" class="output-box block w-full h-10 px-3 py-2 border rounded-md bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    {{bmr}}<!-- Output BMR value here -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <h4 class="text-lg font-medium">Ideal Weight</h4>
+                                <div id="ideal-weight" class="output-box block w-full h-10 px-3 py-2 border rounded-md bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                   {{iw}} <!-- Output ideal weight value here -->
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="text-lg font-medium">Body Fat Percentage</h4>
+                                <div id="bf" class="output-box block w-full h-10 px-3 py-2 border rounded-md bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    {{bf}}<!-- Output body fat percentage value here -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <h4 class="text-lg font-medium">Total Body Water</h4>
+                                <div id="tw" class="output-box block w-full h-10 px-3 py-2 border rounded-md bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    {{tw}}<!-- Output total body water value here -->
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="text-lg font-medium">Physique</h4>
+                                <div id="phsq" class="output-box block w-full h-10 px-3 py-2 border rounded-md bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    {{phsq}}<!-- Output physique value here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

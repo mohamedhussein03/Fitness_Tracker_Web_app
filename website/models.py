@@ -13,3 +13,12 @@ class Attribute(db.Model):
     calorie_intake = db.Column(db.Float)
     water_intake = db.Column(db.Float)
     weight_goal = db.Column(db.Float)
+
+
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), unique=True)
+    password = db.Column(db.String(150))
+    first_name = db.Column(db.String(150))
+    Attributes = db.relationship('Attribute')    
