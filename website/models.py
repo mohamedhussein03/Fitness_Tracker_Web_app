@@ -23,13 +23,3 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     Attributes = db.relationship('Attribute')    
 
-class food(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    apple = 52
-    chicken = 299
-    brocolli = 68
-    meat = 215
-    egg = 142
-    banana = 105 
-    orange = 45

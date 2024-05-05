@@ -90,14 +90,14 @@
         <form id="captchaForm" onsubmit="return validateCaptcha()">
             <label for="captcha">Enter the text you see</label>
             <input type="text" id="captcha" name="captchaText" placeholder="Type the text" required>
-            <button type="submit">Verify</button>
+            <button type="submit">Verify<a href="home.html"></a></button>
         </form>
     </div>
 
     <script>
         function validateCaptcha() {
             var userInput = document.getElementById("captcha").value.trim();
-            if (userInput.toUpperCase() === "W68HP") {
+            if (userInput === "W68HP") {
                 // Redirect to sign-up page if CAPTCHA is correct
                 window.location.href = "/sign-up";
                 return false; // Prevent form submission

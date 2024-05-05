@@ -65,3 +65,30 @@ def sign_up():
             return redirect(url_for('Data.home'))
 
     return render_template("sign_up.html", user=current_user)
+
+
+
+@auth.route('/home', methods=['GET', 'POST'])  
+@login_required
+def home_page():
+    user=User.query.filter_by(id=current_user.id).first()
+    name=user.first_name
+    attribute=Attribute.query.filter_by(user_id=current_user.id).first()
+    if attribute:
+     weight=attribute.weight
+     height=attribute.height
+     age=attribute.age
+     weight_goal=attribute.weight_goal
+     calorie_intake=attribute.calorie_intake
+     water_intake=attribute.water_intake
+
+    else:
+     weight="N/A"
+     height="N/A"
+     age="N/A"
+     weight_goal="N/A"
+     calorie_intake="N/A"
+     water_intake="N/A"
+
+    return render_template("home.html",name=name,weight=weight,height=height,age=age, user=current_user,weight_goal=weight_goal,calorie_intake=calorie_intake,water_intake=water_intake) 
+

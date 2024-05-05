@@ -82,10 +82,9 @@
                 <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 <a class="nav-item nav-link" href="/">Home</a>
             {% else %}
-                <a class="nav-item nav-link" id="login" href="/login">Login</a>
-                <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+                <a class="nav-item nav-link" href="/">Home</a>
             {% endif %}
-            <a class="nav-item nav-link" id="subscription" href="/subscription">Subscription</a>
+            
         </nav>
     </header>
 
@@ -98,14 +97,14 @@
                         class="flex h-10 items-center justify-between rounded-md border border-input bg-background
                         px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none
                         focus:ring-2 focus:ring-ring focus:ring-offset-2 w-full">
-                        <option value="" disabled selected>Select food</option>
-                        <option value="Apple">Apple per 100g</option>
-                        <option value="Orange">Orange per 100g</option>
-                        <option value="Eggs">Banana</option>
-                        <option value="Chicken">Chicken per 125g</option>
-                        <option value="Meat">Meat per 150g</option>
-                        <option value="Broccoli">Broccoli per 200g</option>
-                        <option value="Eggs">Eggs per 100g</option>
+                        <option value="" data-calories="0" disabled selected>Select food</option>
+                        <option value="Apple" data-calories="52">Apple per 100g</option>
+                        <option value="Orange" data-calories="45">Orange per 100g</option>
+                        <option value="Banana" data-calories="89">Banana per 100g</option>
+                        <option value="Chicken" data-calories="299">Chicken per 125g</option>
+                        <option value="Meat" data-calories="215">Meat per 150g</option>
+                        <option value="Broccoli" data-calories="68">Broccoli per 200g</option>
+                        <option value="Eggs" data-calories="142">Eggs per 100g</option>
                     </select>
                     <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm
                         font-medium ring-offset-background transition-colors focus:outline-none focus:ring-2
@@ -121,6 +120,7 @@
             <div id="foodLogContainer" class="grid gap-4">
                 <!-- Food log entries will be dynamically added here -->
             </div>
+            <div id="totalCalories">Total Calories: 0</div>
         </section>
     </main>
 
@@ -129,9 +129,11 @@
             event.preventDefault(); // Prevent the default form submission
 
             const foodSelect = document.getElementById('foodSelect');
-            const selectedFood = foodSelect.value;
+            const selectedOption = foodSelect.options[foodSelect.selectedIndex];
+            const selectedFood = selectedOption.value;
+            const selectedCalories = parseInt(selectedOption.dataset.calories);
 
-            if (selectedFood) {
+            if (selectedFood && selectedCalories) {
                 // Create food log entry HTML
                 const foodLogEntry = document.createElement('div');
                 foodLogEntry.className = 'bg-blue-50 rounded-lg p-4 flex items-center justify-between';
@@ -140,24 +142,45 @@
                 foodName.className = 'font-medium';
                 foodName.textContent = selectedFood;
 
+                const calories = document.createElement('span');
+                calories.textContent = selectedCalories + ' kcal';
+
                 const removeButton = document.createElement('button');
                 removeButton.className = 'inline-flex items-center justify-center rounded-full p-1 bg-red-500 text-white';
                 removeButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></svg>';
                 removeButton.onclick = function() {
                     foodLogEntry.remove();
+                    updateTotalCalories();
                 };
 
                 foodLogEntry.appendChild(foodName);
+                foodLogEntry.appendChild(calories);
                 foodLogEntry.appendChild(removeButton);
 
-                // Append food log entry to container
+                
                 const foodLogContainer = document.getElementById('foodLogContainer');
                 foodLogContainer.appendChild(foodLogEntry);
 
-                // Clear selection after adding food
+                
                 foodSelect.selectedIndex = 0;
+
+              
+                updateTotalCalories();
             }
         });
+
+        function updateTotalCalories() {
+            const foodLogEntries = document.querySelectorAll('#foodLogContainer .bg-blue-50');
+            let totalCalories = 0;
+            foodLogEntries.forEach(function(entry) {
+                const caloriesSpan = entry.querySelector('span:nth-child(2)');
+                const calories = parseInt(caloriesSpan.textContent);
+                totalCalories += calories;
+            });
+
+            const totalCaloriesContainer = document.getElementById('totalCalories');
+            totalCaloriesContainer.textContent = 'Total Calories: ' + totalCalories + ' kcal';
+        }
     </script>
 </body>
 

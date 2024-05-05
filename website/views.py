@@ -58,7 +58,7 @@ def price_page():
 
 
 @Data.route('/captcha', methods=['GET', 'POST'])
-def captcha_page():
+def captcha_page():	
    return render_template("captcha.html")
    
 @Data.route('/food', methods=['GET', 'POST'])
