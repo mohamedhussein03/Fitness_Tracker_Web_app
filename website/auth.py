@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User,Attribute
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -21,7 +21,7 @@ def login():
             if user.password == password:
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('Data.home'))
+                return redirect(url_for('auth.home_page'))
             else:
                 flash('Incorrect password, please try again.', category='error')
         else:
@@ -65,5 +65,3 @@ def sign_up():
             return redirect(url_for('Data.home'))
 
     return render_template("sign_up.html", user=current_user)
-
-

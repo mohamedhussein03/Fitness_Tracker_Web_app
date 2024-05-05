@@ -52,9 +52,9 @@ def home():
     return render_template("User_data.html", user=current_user)
 
 
-@Data.route('/subscribtion', methods=['GET', 'POST'])
+@Data.route('/subscription', methods=['GET', 'POST'])
 def price_page():
-   return render_template("subscribtion.html")
+   return render_template("subscription.html")
 
 
 @Data.route('/captcha', methods=['GET', 'POST'])
@@ -64,4 +64,8 @@ def captcha_page():
 @Data.route('/food', methods=['GET', 'POST'])
 def food_page():
    return render_template("food.html")
+   
+@Data.route('/feedback', methods=['GET', 'POST'])
+def feedback_page():
+   return render_template("feedback.html")
    

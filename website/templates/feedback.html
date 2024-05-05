@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue and White Theme with FAQs</title>
+    <style>
+        /* General body styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* White background color */
+            color: #000000; /* Black text color */
+        }
+
+        /* Custom CSS for navbar */
+        .header {
+            background-color: #001aff; /* Blue background color */
+            color: #ebecee; /* Light text color */
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Custom CSS for navbar links */
+        .header a {
+            color: #ebecee; /* Light text color for links */
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 15px; /* Add spacing between links */
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Custom CSS for navbar brand */
+        .header-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-brand svg {
+            stroke: #ebecee; /* Light stroke color for SVG icon */
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        .header-brand span {
+            font-size: 20px;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .image-container {
+            width: 50%; /* Reduced width for photo boxes */
+            max-width: 400px; /* Maximum width for image inside container */
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* FAQs styles */
+        .faq-section {
+            background-color: #f9f9f9; /* Light gray background color for FAQ section */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-top: 20px;
+            text-align: left; /* Align FAQ content to the left */
+        }
+
+        .faq-question {
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #007bff; /* Blue color for question */
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #ffffff; /* White background color for question */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #ffffff; /* White background color for answer */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Show/hide animation for FAQs */
+        .show-answer {
+            display: block;
+        }
+        .h1{
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position:relative;
+            position:absolute;
+            
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+            </svg>
+            <span>Track Pal</span>
+        </div>
+        <nav class="nav-links">
+            <!-- Replace the below links with your desired navigation items -->
+            <a class="nav-item nav-link" href="/">Home</a>
+            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+
+        </nav>
+    </header>
+    <h1>  
+        Feedback from users
+    </h1>
+
+    <main>
+        
+        <!-- Image placeholders -->
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image_1.jpg') }}" alt="Image 1">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image_2.png') }}" alt="Image 2">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image_3.jpg') }}" alt="Image 3">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image_4.png') }}" alt="Image 4">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image_5.jpg') }}" alt="Image 1">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image_6.jpg') }}" alt="Image 1">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image_7.jpg') }}" alt="Image 1">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='image_8.jpg') }}" alt="Image 1">
+        </div>
+
+
+        <!-- FAQs section -->
+        <section>
+            <h2>Frequently Asked Questions (FAQs)</h2>
+            <div class="faq-section">
+                <div class="faq-question" onclick="toggleAnswer(this)">What is the purpose of Track Pal?</div>
+                <div class="faq-answer">The fitness tracker is designed to help you monitor your physical activity, track your progress, and achieve your fitness goals.</div>
+                <div class="faq-question" onclick="toggleAnswer(this)">How do I set up my fitness tracker?</div>
+                <div class="faq-answer">Sign up and create an account, fill in your body preferences and view your index, select your daily food to calculate the calories.</div>
+                <div class="faq-question" onclick="toggleAnswer(this)">What are the different subscription plans?</div>
+                <div class="faq-answer">We have three different subscription plans: Basic, Premium, and Elite. <a href="/subscription">Learn more about Subscription</a></div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            answer.classList.toggle('show-answer');
+        }
+    </script>
+
+</body>
+
+</html>
