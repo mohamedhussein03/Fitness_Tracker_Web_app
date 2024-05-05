@@ -81,8 +81,10 @@
             {% if user and user.is_authenticated %}
                 <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link" href="/home">Profile</a>
             {% else %}
                 <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link" href="/home">Profile</a>
             {% endif %}
             
         </nav>
