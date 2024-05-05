@@ -85,32 +85,35 @@
                 <a class="nav-item nav-link" id="login" href="/login">Login</a>
                 <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
             {% endif %}
-            <a class="nav-item nav-link" id="subscribtion" href="/subscribtion">Subscription</a>
+            <a class="nav-item nav-link" id="subscription" href="/subscription">Subscription</a>
         </nav>
     </header>
 
     <main class="bg-white py-8 px-6">
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-4">Add Food</h2>
-            <div class="flex items-center gap-4">
-                <select id="foodSelect"
-                    class="flex h-10 items-center justify-between rounded-md border border-input bg-background
-                    px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none
-                    focus:ring-2 focus:ring-ring focus:ring-offset-2 w-full">
-                    <option value="" disabled selected>Select food</option>
-                    <option value="Apple">Apple</option>
-                    <option value="Chicken">Chicken</option>
-                    <option value="Broccoli">Broccoli</option>
-                    <option value="Meat">Meat</option>
-                    <option value="Eggs">Eggs</option>
-                </select>
-                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm
-                    font-medium ring-offset-background transition-colors focus:outline-none focus:ring-2
-                    focus:ring-ring focus:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-                    onclick="addFood()">
-                    Add
-                </button>
-            </div>
+            <form id="foodForm" action="/submit-food" method="POST">
+                <div class="flex items-center gap-4">
+                    <select name="food" id="foodSelect"
+                        class="flex h-10 items-center justify-between rounded-md border border-input bg-background
+                        px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none
+                        focus:ring-2 focus:ring-ring focus:ring-offset-2 w-full">
+                        <option value="" disabled selected>Select food</option>
+                        <option value="Apple">Apple per 100g</option>
+                        <option value="Orange">Orange per 100g</option>
+                        <option value="Eggs">Banana</option>
+                        <option value="Chicken">Chicken per 125g</option>
+                        <option value="Meat">Meat per 150g</option>
+                        <option value="Broccoli">Broccoli per 200g</option>
+                        <option value="Eggs">Eggs per 100g</option>
+                    </select>
+                    <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm
+                        font-medium ring-offset-background transition-colors focus:outline-none focus:ring-2
+                        focus:ring-ring focus:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                        Add
+                    </button>
+                </div>
+            </form>
         </section>
 
         <section>
@@ -122,7 +125,9 @@
     </main>
 
     <script>
-        function addFood() {
+        document.getElementById('foodForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
             const foodSelect = document.getElementById('foodSelect');
             const selectedFood = foodSelect.value;
 
@@ -137,7 +142,7 @@
 
                 const removeButton = document.createElement('button');
                 removeButton.className = 'inline-flex items-center justify-center rounded-full p-1 bg-red-500 text-white';
-                removeButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+                removeButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></svg>';
                 removeButton.onclick = function() {
                     foodLogEntry.remove();
                 };
@@ -152,7 +157,7 @@
                 // Clear selection after adding food
                 foodSelect.selectedIndex = 0;
             }
-        }
+        });
     </script>
 </body>
 

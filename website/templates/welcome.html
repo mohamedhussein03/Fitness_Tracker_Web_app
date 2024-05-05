@@ -1,106 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Track Pal</title>
-  <style>
-    /* Resetting default margin and padding */
-    body, html {
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Pal</title>
+    <style>
+        /* Resetting default margin and padding */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
 
-    /* Styling the header */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background-color: transparent;
-      z-index: 1000; /* Ensure the header is above other content */
-    }
+        /* Styling the header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: transparent;
+            z-index: 1000; /* Ensure the header is above other content */
+        }
 
-    .header-brand {
-      display: flex;
-      align-items: center;
-      color: #2500fa; /* Blue color for logo and brand name */
-      font-size: 2.5rem; /* Increased font size */
-      font-weight: bold;
-    }
+        .header-brand {
+            display: flex;
+            align-items: center;
+            color: #2500fa; /* Blue color for logo and brand name */
+            font-size: 3.7rem; /* Increased font size */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
 
-    .header-brand svg {
-      width: 45px;
-      height: 45px;
-      fill: #3320e0; /* Blue color for logo */
-      margin-right: 8px; /* Add spacing between logo and text */
-    }
+        .header-brand svg {
+            width: 55px;
+            height: 45px;
+            fill: #3320e0; /* Blue color for logo */
+            margin-right: 8px; /* Add spacing between logo and text */
+        }
 
-    /* Styling the main container */
-    main {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh; /* Full viewport height */
-      overflow: hidden; /* Prevent scroll bars */
-      position: relative; /* Ensure relative positioning for inner elements */
-    }
+        /* Styling the main container */
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Prevent scroll bars */
+            position: relative; /* Ensure relative positioning for inner elements */
+        }
 
-    /* Styling the background image */
-    .absolute {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      /* Add background image */
-      background-image: url('https://wordpresscmsprodstor.blob.core.windows.net/wp-cms/2021/10/49.jpg');
-    }
+        /* Styling the background video */
+        .absolute {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Place behind other content */
+        }
 
-    /* Styling the inner container */
-    .relative {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    /* Styling the heading */
-    .text-4xl {
-      font-size: 5.5rem; /* Increased font size for larger heading */
-      margin-top: -27rem; /* Adjusted negative margin to move the heading upward */
-      color: #260080; /* Blue color for heading */
-      font-weight: bold;
-    }
+        /* Styling the inner container */
+        .relative {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1; /* Ensure content is above the video */
+        }
 
-    .font-bold {
-      font-weight: bold;
-    }
+        /* Styling the heading */
+        .text-4xl {
+            font-size: 5.5rem; /* Increased font size for larger heading */
+            color: #002fff; /* Blue color for heading */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+            margin-top: -22rem; /* Add spacing below the heading */
+        }
 
-    .tracking-tighter {
-      letter-spacing: -0.025em;
-    }
-
-    .text-gray-900 {
-      color: #0011ff;
-    }
-
-    .dark:text-gray-50 {
-      color: #f7fafc;
-    }
-
-    /* Styling the blue button */
-    .blue-button {
+        /* Styling the blue button */
+        .blue-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -115,36 +108,41 @@
       transition: background-color 0.2s;
       border: none;
       border-radius: 25px;
-      box-shadow: -6px -6px 10px #2563eb; 
+      box-shadow: -3px -3px 5px #2563eb; 
     }
 
     .blue-button:hover {
       background-color: #2563eb;
     }
-  </style>
+    </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="header-brand">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
-      </svg>
-      <span>Track Pal</span>
-    </div>
-  </header>
-  <main class="flex items-center justify-center bg-white dark:bg-gray-900">
-    <div class="absolute"></div> <!-- Background image layer -->
-    <div class="relative w-full h-full z-10">
-      <div class="relative flex flex-col items-center justify-center space-y-6 text-center">
-        <h1 class="text-4xl sm:text-8xl font-bold tracking-tighter text-gray-900 dark:text-gray-50">
-          Welcome to Track Pal
-        </h1>
-        <a href="captcha" class="blue-button">
-          Start
-        </a>
-      </div>
-    </div>
-  </main>
+    <header class="header">
+        <div class="header-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+            </svg>
+            <span>Track Pal</span>
+        </div>
+    </header>
+    <main>
+        <div class="absolute">
+            <video autoplay muted loop>
+                <!-- Update the src attribute with the correct path to your video file -->
+                <source src="{{ url_for('static', filename='gym_background.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+        <div class="relative">
+            <div class="text-4xl font-bold">
+                Welcome to Track Pal
+            </div>
+            <a href="captcha" class="blue-button">
+                Start Now
+            </a>
+        </div>
+    </main>
 </body>
+
 </html>
